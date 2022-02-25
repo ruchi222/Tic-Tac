@@ -39,10 +39,38 @@ const MakeMove = (x, y) => {
     player.value = player.value === 'x' ? 'o' : 'x'
 }
 
+const ResetGame = () => {
+    board.value = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+    ]
+    player.value = 'X'
+}
+
 </script>
 
 <template>
-<h1>Hello World!</h1>
+<main class="pt-8 text-center dark:bg-gray-800 min-h-screen dark:text-white">
+    <h1 class="mb-8 text-3x1 font-bold uppercase">Tic Tac Toe</h1>
+    <h3 class="text-x1 mb-4">Player {{ player }}'s turn</h3>
+    <div class=".flex.flex-col items-center mb-8">
+    <div
+        v-for="(row, x) in board"
+        :key="x"
+        class="flex">
+
+        <div v-for="(cell, y) in row"
+        :key="y"
+        @click="MakeMove(x,y)"
+        :class="`border border-white w-20 h-20 hover:bg-gray-700 flex items-center justify-center material-icons-outlined text-4x1 cursor-pointer`">
+        {{ cell === 'X'  ? 'close' : cell === 'O' ? 'circle' : ''}}
+        </div>
+    </div>
+    </div>
+  
+</main>
+
 </template>
 
 <style>
